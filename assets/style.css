@@ -106,3 +106,13 @@ body{
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
+.side-input{
+	width: 100%;
+	vertical-align: middle;
+	text-align: center;
+}
+.side-input input{
+	margin: 5px 0px;
+	padding: 5px 5px;
+	width: 90%;
+}
