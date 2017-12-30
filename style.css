@@ -1,7 +1,7 @@
 body{
 	margin: 0;
 	padding: 0;
-	background-color: #1b1b1b;  
+	background-color: #1b1b1b;
 	font-family: Ubuntu,Arial,"libra sans",sans-serif;
 	color: #ffffff;
 }
@@ -11,13 +11,13 @@ body{
 	height: 100%;
 	width: 250px;
 	position: absolute;
-	background-color: #222222;  
+	background-color: #222222;
 	display: block;
 }
 .tags{
 	background-color:#111111;
 	border-radius: 0px 0px 5px 5px;
-	text-align: center; 
+	text-align: center;
 	display: block;
 	vertical-align: middle;
 	padding: 2px;
@@ -33,6 +33,9 @@ body{
 .Yii{
 	color: pink;
 }
+.Wordpress{
+	color: #4EA5C4;
+}
 
 
 .content{
@@ -41,7 +44,7 @@ body{
 	margin:  0 0 0 250px;
 	padding-top: 50px;
 	padding-left: 50px;
-	background-color: transparent;  
+	background-color: transparent;
 	display: block;
 }
 .file_list{
@@ -72,7 +75,7 @@ body{
 
 .side_title{
 	position: relative;
-	color: #FFFFFF; 
+	color: #FFFFFF;
 	padding-top: 10px;
 	width: 250px;
 	font-size: 32px;
@@ -82,7 +85,7 @@ body{
 }
 .side_head{
 	position: relative;
-	color: #cc181e; 
+	color: #cc181e;
 	padding-top: 10px;
 	padding-left: 5px;
 	width: 245px;
@@ -93,7 +96,7 @@ body{
 }
 .side_container{
 	position: relative;
-	color: #FFFFFF; 
+	color: #FFFFFF;
 	margin-top: 10px;
 	padding-left: 0px;
 	background-color: #1b1b1b;
@@ -109,7 +112,7 @@ body{
 	text-decoration: none;
 	font-style: none;
 	color: #FFFFFF;
-	margin: 5px 0; 
+	margin: 5px 0;
 	padding: 5px 5px;
 	width: 240px;
 	display: block;
@@ -121,7 +124,7 @@ body{
 .rule{
 	width: 95%;
 	height: 1px;
-	background-color: #FFFFFF; 
+	background-color: #FFFFFF;
 	opacity: 0.5;
 	margin: auto;
 	margin-top: 5px;

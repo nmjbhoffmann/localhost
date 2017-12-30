@@ -15,34 +15,8 @@ function get_folder_size($path){
     return $size;
 }
 
-function update_host_file($hosts = 'localhost',$line_number){
-
-    $f = fopen('/etc/hosts', 'r');
-    $data = '';
-    for ($i = 1; ($line = fgets($f)) !== false; $i++) {
-        if ($i == $line_number){
-            $line = "127.0.0.1   ".$hosts." #Generated Automatically by Localhost Script".PHP_EOL;
-        }else {
-            $line = $line;
-        }
-
-        $data = $data.$line;
-    }
-    $handle = fopen('/etc/hosts', 'w') or
-    die(
-        'Cannot write to your hosts file, please check apache has write access to your /etc/hosts file.<br/>'.
-        'Note doing so is a security risk and only do this if you know what you are doing, or set $hostfile_update=0 and update your hostfile manually.'
-    );
-
-    fwrite($handle, $data);
-    fclose($f);
-
-}
-
-function list_sites($exclude_list = array(".",".."),$path,$submode = false,$domain_name="",$class="",$hostfile_update=0){
+function list_sites($exclude_list = array(".",".."),$path,$submode = false,$domain_name="",$class=""){
     $dir_handle = @opendir($path) or die("Invalid Directory");
-    $file_list = "";
-    $host_list = "";
 
     while (false !== ($folder = readdir($dir_handle))) {
     if(in_array($folder, $exclude_list))
@@ -59,7 +33,6 @@ function list_sites($exclude_list = array(".",".."),$path,$submode = false,$doma
             }
 
             closedir($project_path);
-
 
             //Check what type of project it is based on the files inside
             if (in_array("wp-config.php", $project_files)) {
@@ -78,32 +51,40 @@ function list_sites($exclude_list = array(".",".."),$path,$submode = false,$doma
                 $type = "Custom Project";
             }
 
-            //Get Folder Size, This will impact performace of the site when you have folders with milions of files.
+
+            //Get Folder Size
             $size = get_folder_size($path."/".$folder."/");
             //Make some pretty File names
             $file_title = str_replace("_", " ", $folder);
             $file_title = ucwords(strtolower($file_title));
             if ($submode == true) {
-                $file_list = "<li class='".$class." ".$type."'><a href='http://".$folder.".".$domain_name."'>".$file_title."</a><small class='tags ".$type."'>".$type." <div class='tag-size'>= ".$size."</div></small></li>".$file_list;
+                echo "<li class='".$class." ".$type."'><a href='https://".$folder.".".$domain_name."'>".$file_title."</a><small class='tags ".$type."'>".$type." <div class='tag-size'>= ".$size."</div></small></li>";
             }
             else{
-                $file_list =  "<li class='".$class." ".$type."'><a href='http://".$domain_name."/".$folder."'>".$file_title."</a><small class='tags ".$type."'>".$type." <div class='tag-size'>= ".$size."</div></small></li>".$file_list;
-
+                echo "<li class='".$class." ".$type."'><a href='https://".$domain_name."/".$folder."'>".$file_title."</a><small class='tags ".$type."'>".$type." <div class='tag-size'>= ".$size."</div></small></li>";
             }
-
-            //This is used to update the hosts file
-            $host_list = $folder.".".$domain_name." ".$host_list;
         }
-
-
     }
     closedir($dir_handle);
-    if ($hostfile_update != 0 && $submode=true) {
-        update_host_file($host_list,$hostfile_update);
+}
+
+function config($data = FALSE)
+{
+    # Read the current data file
+    $current_data = unserialize(file_get_contents("data"));
+
+    # If no data needs to be saved, just return what's there in array format
+    if ($data)
+    {
+        $data_file = fopen("data", "w") or die("Unable to open data file!");
+        foreach ($data as $key => $value) {
+            $current_data[$key] = $value;
+        }
+        fwrite($data_file, serialize($current_data));
     }
 
-
-    return $file_list;
+    return $current_data;
 }
+
 
 ?>
