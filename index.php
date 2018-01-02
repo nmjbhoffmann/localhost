@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html>
 <?php
-
-?>
-
-<?php
     include('functions.php');
-    $config = config();
-    if (!isset($config['domain_name'])) { $config['domain_name']   = 'Kira Home'; }
-    if (!isset($config['path'])) { $config['path']                 = '/home/snickers/public_html'; }
-    if (!isset($config['base_url'])) { $config['base_url']         = 'https://localhost.alpha.kira/'; }
-    if (!isset($config['submode'])) { $config['submode']           = 'TRUE'; }
-    if (!isset($config['redirect'])) { $config['redirect']         = 'https://localhost.alpha.kira/'; }
-    if (!isset($config['exclude_list'])) { $config['exclude_list'] = [ ".","..","index.php","functions.php","style.css" ]; }
+    $sites  = new Sitelister();
+    $config = $sites->config();
+    if (isset($_POST['pinsite']))
+    {
+        $sites->pin_site($_POST['pinsite']);
+    }
+
 ?>
 
 <head>
@@ -36,7 +32,7 @@
     </div>
 
 </div>
-    <div class="content"> <?=list_sites($config['exclude_list'],$config['path'],TRUE,$config['domain_name'],'file_list'); ?>
+    <div class="content"> <?=$sites->list_pinned_sites(); ?> <br/><?=$sites->list_sites(); ?>
 </div>
 </body>
 </html>
